@@ -1,0 +1,10 @@
+Cookies accepted.
+Scrolled to questions section.
+Clicked on question: Сколько это стоит? И как оплатить?
+Answer not found or text does not match: Message: 
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:193:5
+NoSuchElementError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:511:5
+dom.find/</<@chrome://remote/content/shared/DOM.sys.mjs:136:16
+
