@@ -1,13 +1,13 @@
-from selenium.webdriver.common.by import By
+import allure
+from .base_page import BasePage
+from locators.header_locators import HeaderLocators
 
-class Header:
-    def __init__(self, driver):
-        self.driver = driver
-        self.scooter_logo = driver.find_element(By.CSS_SELECTOR, ".Header_LogoScooter__3lsAR")
-        self.yandex_logo = driver.find_element(By.CSS_SELECTOR, ".Header_LogoYandex__3TSOI")
-
+class Header(BasePage):
+    @allure.step("Клик по логотипу Scooter")
     def click_scooter_logo(self):
-        self.scooter_logo.click()
+        self.click_element(HeaderLocators.SCOOTER_LOGO)
 
+    @allure.step("Клик по логотипу Yandex")
     def click_yandex_logo(self):
-        self.yandex_logo.click()
+        self.click_element(HeaderLocators.YANDEX_LOGO)
+

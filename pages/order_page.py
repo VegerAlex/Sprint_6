@@ -1,18 +1,14 @@
-from selenium.webdriver.common.by import By
+import allure
+from .base_page import BasePage
+from locators.order_page_locators import OrderPageLocators
 
-class OrderPage:
-    def __init__(self, driver):
-        self.driver = driver
-        self.name_field = driver.find_element(By.XPATH, "//input[@placeholder='* Имя']")
-        self.surname_field = driver.find_element(By.XPATH, "//input[@placeholder='* Фамилия']")
-        self.address_field = driver.find_element(By.XPATH, "//input[@placeholder='* Адрес: куда привезти заказ']")
-        self.phone_field = driver.find_element(By.XPATH, "//input[@placeholder='* Телефон: на него позвонит курьер']")
-        self.submit_button = driver.find_element(By.CSS_SELECTOR, ".Button_Button__ra12g.Button_Middle__1CSJM")
-
+class OrderPage(BasePage):
+    @allure.step("Заполнение формы заказа")
     def fill_order_form(self, name, surname, address, phone):
-        self.name_field.send_keys(name)
-        self.surname_field.send_keys(surname)
-        self.address_field.send_keys(address)
-        self.phone_field.send_keys(phone)
-        self.submit_button.click()
+        self.send_keys_to_element(OrderPageLocators.NAME_FIELD, name)
+        self.send_keys_to_element(OrderPageLocators.SURNAME_FIELD, surname)
+        self.send_keys_to_element(OrderPageLocators.ADDRESS_FIELD, address)
+        self.send_keys_to_element(OrderPageLocators.PHONE_FIELD, phone)
+        self.click_element(OrderPageLocators.SUBMIT_BUTTON)
+
 

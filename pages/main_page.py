@@ -1,13 +1,12 @@
-from selenium.webdriver.common.by import By
+import allure
+from .base_page import BasePage
+from locators.main_page_locators import MainPageLocators
 
-class MainPage:
-    def __init__(self, driver):
-        self.driver = driver
-        self.order_button_top = driver.find_element(By.CSS_SELECTOR, ".Button_Button__ra12g")
-        self.order_button_bottom = driver.find_element(By.CSS_SELECTOR, ".Button_Button__ra12g.Button_Middle__1CSJM")
-
+class MainPage(BasePage):
+    @allure.step("Клик по верхней кнопке заказа")
     def click_order_top(self):
-        self.order_button_top.click()
+        self.click_element(MainPageLocators.ORDER_BUTTON_TOP)
 
+    @allure.step("Клик по нижней кнопке заказа")
     def click_order_bottom(self):
-        self.order_button_bottom.click()
+        self.click_element(MainPageLocators.ORDER_BUTTON_BOTTOM)
