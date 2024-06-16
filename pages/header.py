@@ -11,3 +11,16 @@ class Header(BasePage):
     def click_yandex_logo(self):
         self.click_element(HeaderLocators.YANDEX_LOGO)
 
+    @allure.step("Клик по ссылке 'Как это работает'")
+    def click_how_it_works(self):
+        self.click_element(HeaderLocators.HOW_IT_WORKS)
+
+    @allure.step("Клик по ссылке 'О компании'")
+    def click_about_us(self):
+        self.click_element(HeaderLocators.ABOUT_US)
+
+    @allure.step("Клик по ссылке 'Контакты'")
+    def click_contacts(self):
+        self.click_element(HeaderLocators.CONTACTS)
+
+

@@ -1,8 +1,12 @@
 import allure
 from .base_page import BasePage
-from locators.important_questions_page_locators import ImportantQuestionsPageLocators
+from locators.important_questions_locators import ImportantQuestionsPageLocators
 
 class ImportantQuestionsPage(BasePage):
+    @allure.step("Ожидание загрузки страницы важных вопросов")
+    def wait_for_page_to_load(self):
+        self.wait_for_element_visible(ImportantQuestionsPageLocators.PAGE_HEADER)
+
     @allure.step("Клик по вопросу")
     def click_question(self, index):
         questions = self.wait_for_element_visible(ImportantQuestionsPageLocators.QUESTIONS)
