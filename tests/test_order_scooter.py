@@ -3,11 +3,6 @@ import allure
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from pages.confirmation_page import ConfirmationPage
-from locators.urls import URLsimport pytest
-import allure
-from pages.main_page import MainPage
-from pages.order_page import OrderPage
-from pages.confirmation_page import ConfirmationPage
 from pages.header import Header
 from locators.urls import URLs
 
@@ -48,3 +43,24 @@ class TestOrderScooter:
         with allure.step("Переход на страницу 'Контакты'"):
             header.click_contacts()
             assert driver.current_url == URLs.CONTACTS_PAGE
+
+    @allure.title("Тест перехода по логотипу Scooter")
+    def test_scooter_logo(self, driver):
+        with allure.step("Открытие страницы 'Как это работает'"):
+            driver.get(URLs.HOW_IT_WORKS_PAGE)
+            header = Header(driver)
+
+        with allure.step("Клик по логотипу Scooter"):
+            header.click_scooter_logo()
+            assert driver.current_url == URLs.MAIN_PAGE
+
+    @allure.title("Тест перехода по логотипу Яндекс")
+    def test_yandex_logo(self, driver):
+        with allure.step("Открытие главной страницы"):
+            driver.get(URLs.MAIN_PAGE)
+            header = Header(driver)
+
+        with allure.step("Клик по логотипу Яндекс"):
+            header.click_yandex_logo()
+            driver.switch_to.window(driver.window_handles[-1])
+            assert "dzen.ru" in driver.current_url

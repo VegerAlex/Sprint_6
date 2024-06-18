@@ -1,6 +1,9 @@
 import allure
 from .base_page import BasePage
 from locators.header_locators import HeaderLocators
+import allure
+from .base_page import BasePage
+from locators.header_locators import HeaderLocators
 
 class Header(BasePage):
     @allure.step("Клик по логотипу Scooter")
