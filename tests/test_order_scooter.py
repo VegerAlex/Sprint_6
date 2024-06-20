@@ -34,33 +34,31 @@ class TestOrderScooter:
 
         with allure.step("Переход на страницу 'Как это работает'"):
             header.click_how_it_works()
-            assert driver.current_url == URLs.HOW_IT_WORKS_PAGE
+            assert header.get_current_url() == URLs.HOW_IT_WORKS_PAGE
 
         with allure.step("Переход на страницу 'О компании'"):
             header.click_about_us()
-            assert driver.current_url == URLs.ABOUT_US_PAGE
+            assert header.get_current_url() == URLs.ABOUT_US_PAGE
 
         with allure.step("Переход на страницу 'Контакты'"):
             header.click_contacts()
-            assert driver.current_url == URLs.CONTACTS_PAGE
+            assert header.get_current_url() == URLs.CONTACTS_PAGE
 
-    @allure.title("Тест перехода по логотипу Scooter")
-    def test_scooter_logo(self, driver):
-        with allure.step("Открытие страницы 'Как это работает'"):
-            driver.get(URLs.HOW_IT_WORKS_PAGE)
-            header = Header(driver)
-
-        with allure.step("Клик по логотипу Scooter"):
-            header.click_scooter_logo()
-            assert driver.current_url == URLs.MAIN_PAGE
-
-    @allure.title("Тест перехода по логотипу Яндекс")
-    def test_yandex_logo(self, driver):
+    @allure.title("Тест на переход по логотипам")
+    def test_navigation_logos(self, driver):
         with allure.step("Открытие главной страницы"):
             driver.get(URLs.MAIN_PAGE)
             header = Header(driver)
 
-        with allure.step("Клик по логотипу Яндекс"):
+        with allure.step("Проверка перехода на главную страницу 'Самоката' по логотипу 'Самоката'"):
+            header.click_scooter_logo()
+            WebDriverWait(driver, 10).until(EC.url_to_be(URLs.MAIN_PAGE))
+            assert header.get_current_url() == URLs.MAIN_PAGE
+
+        with allure.step("Проверка перехода на главную страницу Дзена по логотипу Яндекса"):
             header.click_yandex_logo()
-            driver.switch_to.window(driver.window_handles[-1])
-            assert "dzen.ru" in driver.current_url
+            header.switch_to_new_window()
+            WebDriverWait(driver, 10).until(EC.url_contains("dzen.ru"))
+            assert "dzen.ru" in header.get_current_url()
+            header.close_current_window_and_switch_back()
+
